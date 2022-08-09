@@ -1,16 +1,38 @@
 # factory_pattern
 
-A new Flutter project.
+# Descricao sobre o exemplo
 
-## Getting Started
+1 - Criar abstract class IDialog
+    - definir o comportamento de quem vai implementar deve seguir.
 
-This project is a starting point for a Flutter application.
+2 - Criar um model Dialog Action passando <T>
+    - definir o modelo do action (um child e um onpressed)
 
-A few resources to get you started if this is your first Flutter project:
+3 - Criar o componente conforme conforme a plataforma por exemplo :
+    - criar o IosDialog e implementar o IDialog .. return CupertinoAlertDialog();
+    - criar o AndroidDialog e implementar o IDialog . return AlertDialog().
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+4 - Agora precisamos criar a Factory de fato que é quem vai gerenciar e retornar pra gente qual componente deve ser mostrado ...
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    - criar a classe DialogFactory 
+    
+        - criar metodo para mostrar de fato ...
+        static Future<T?> showAlertDialog(context, {
+            required Widget title,
+            required Widget content,
+            required List<DialogAction> actions,
+        }){
+            IDialog dialog;
+            if (Platform.isAndroid) {
+                dialog = AndroidDialog();
+            } else {
+                dialog = IosDialog();
+            }
+
+            return showDialog(
+                context: context,
+                builder: (context) {
+                    return dialog.criar(context, title, content, actions);
+                },
+            );
+        } 
