@@ -15,19 +15,19 @@ void main(List<String> arguments) {
 
   pessoa2 = pessoa1.clone();
 
-  print(pessoa1.hashCode);
-  print(pessoa2.hashCode);
+  print('HashCode Pessoa1 : ${pessoa1.hashCode}');
+  print('HashCode Pessoa2 : ${pessoa2.hashCode}');
 
   //Devemos ter cuidado com a parte onde dentro da classe existem outras classes, exemplo a seguir ilustrando telefone.
-  print(pessoa1);
-  print(pessoa2);
+  print('Objeto 1 $pessoa1');
+  print('Objeto 2 $pessoa2');
 
   print('---------------------------- || ----------------------------');
   pessoa2.telefones?.removeAt(0);
 
-  print(pessoa1);
-  print('---');
-  print(pessoa2);
+  print('Objeto 1 $pessoa1');
+  print('############ DIFERENCA EM LISTA ############');
+  print('Objeto 2 $pessoa2');
 
   //Perceba que ele tambem removeu o telefone da primeira pessoa, mas pq sera ? 
   //Pq as duas classes estao apontando para a mesma referencia de memória alocada.
